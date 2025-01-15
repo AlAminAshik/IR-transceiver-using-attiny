@@ -24,7 +24,7 @@ uint32_t inHeaderSpaceAtUs = 0 ;
 
 
 
-IRAM_ATTR void isr( ) {
+/*IRAM_ATTR*/ void isr( ) {
   /*
      called by external interrupt
      tests timings are within tolerance range for noise immunity.
@@ -109,11 +109,10 @@ void begin( uint8_t intPin) {
   ir_pin = intPin ;
 
   pinMode( ir_pin, INPUT_PULLUP ) ;
-
+7854
   state = state_t::pendingFrame ;
 
   attachInterrupt( digitalPinToInterrupt(ir_pin) , isr, CHANGE ) ;
-
 }
 
 

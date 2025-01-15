@@ -4,13 +4,13 @@
 #include <Arduino.h>
 #include "IrNec.h" // include the library
 
-#define led D2    // PB2 of attiny85
+#define led 13    // PB3 of attiny85
 
 
 void setup() {
   Serial.begin(115200);
   
-  nsIrNec::begin(D5) ;  // MUST BE EXTERNAL INTERRUPT PIN
+  nsIrNec::begin(3) ;  // MUST BE EXTERNAL INTERRUPT PIN
   pinMode(led, OUTPUT);
   
 }
@@ -32,7 +32,12 @@ void loop() {
       delay(100);
       digitalWrite(led, LOW);
     }
-    Serial.println();
+    else{
+      digitalWrite(led, HIGH);
+      delay(1000);
+      digitalWrite(led, LOW);
+    }
+    //Serial.println();
     nsIrNec::dataOut = 0 ; //clear
   }
 }
