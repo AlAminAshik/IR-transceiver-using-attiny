@@ -12,7 +12,8 @@ void setup() {
   pinMode(irPin, INPUT);
   pinMode(led, OUTPUT);
 
-  oled.begin(128, 74, sizeof(tiny4koled_init_128x64br), tiny4koled_init_128x64br);
+  oled.begin(128, 64, sizeof(tiny4koled_init_128x64br), tiny4koled_init_128x64br);
+  oled.setOffset(3, 0);
   oled.clear();
   oled.on();
   oled.setFont(FONT8X16P);  //set double font size
