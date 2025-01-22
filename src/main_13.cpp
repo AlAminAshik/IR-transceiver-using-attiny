@@ -53,7 +53,7 @@ uint16_t getIrKey(){
   if(key < 0 )
     key = -key;
 
-  delay(250);
+  delay(500);
   return key;
 }
 
