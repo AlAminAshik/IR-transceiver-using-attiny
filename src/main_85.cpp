@@ -1,4 +1,7 @@
 // //This code is for attiny85
+//attiny85 works at 8Mhz and thus len and temp values are used as 5000 and 1000 respectively for NEC.
+//before using this code make sure attiny85 is running at 8Mhz and delay(1000) means 1 sec delay. use the blink sketch to verify this.
+//Refer to "readme attiny 8x slow" if you are not sure about the clock speed.
 // //common code: pwr=17843; stop=18098;
 // //common code: 0=59678; 1=62228; 2=59168 ; 3=41318 ; 4=63248 ; 5=58148 ; 6=42338 ; 7=48458 ; 8=44378 ; 9=46418 ; -=63503 ; +=43102;
 

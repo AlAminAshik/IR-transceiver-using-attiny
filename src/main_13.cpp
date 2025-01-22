@@ -1,4 +1,7 @@
-//This code is for attiny85
+//This code is for attiny13
+//attiny13 works at 9.6MHz default and thus len and temp values are used as 2500 and 500 respectively for NEC.
+//before using this code make sure attiny85 is running at 9.6Mhz and delay(1000) means 1 sec delay. use the blink sketch to verify this.
+//Refer to "readme attiny 8x slow" if you are not sure about the clock speed.
 //common code: pwr=17843; stop=18098;
 //common code: 0=59678; 1=62228; 2=59168 ; 3=41318 ; 4=63248 ; 5=58148 ; 6=42338 ; 7=48458 ; 8=44378 ; 9=46418 ; -=63503 ; +=43102;
 
@@ -10,7 +13,13 @@
 
 //uint16_t pot_values[6] = {59678, 62228, 59168, 41318, 63248, 58148};
 
+
 void setup() {
+    cli();  // Disable interrupts
+    CLKPR = (1 << CLKPCE);  // Enable Clock Prescaler Change
+    CLKPR = 0b0000;  // Set prescaler to 1 (No division, full speed)
+    sei();  // Enable interrupts
+
     pinMode(irPin, INPUT);
     pinMode(led_1, OUTPUT);
     pinMode(led_2, OUTPUT);
@@ -21,10 +30,10 @@ uint16_t getIrKey(){
   unsigned int len = pulseIn(irPin, LOW);
   unsigned int temp = 0;
 	uint16_t key = 0;
-  if(len > 2500) {
+  if(len > 2500) {                      //first high bit
     for(uint8_t i=1 ; i<=32 ; i++){
       temp = pulseIn(irPin, HIGH);
-      if(temp > 500)
+      if(temp > 500)                    //proceeding low bits
         key = key + (1<<(i-17));
     }
   }
@@ -41,9 +50,9 @@ void loop() {
 	if (key != 0)
 	{
 		digitalWrite(led_1, HIGH);
-		delay(500);
+		delay(100);
 		digitalWrite(led_1, LOW);
-		delay(500);
+		delay(100);
 		switch (key)
 		{
 		case 42338: //6

@@ -23,6 +23,7 @@ Change the COMXX port with the designated port. (can be found in Arduno IDE port
 > (optional) check the changed fuse settings:
 Type FOR ATTINY13A: "avrdude -c arduino -p t13 -P COMxx -b 19200 -U lfuse:r:-:h -U hfuse:r:-:h"
 Type FOR ATTINY85 : "avrdude -c arduino -p t85 -P COMxx -b 19200 -U lfuse:r:-:h -U hfuse:r:-:h"
+NB: The default fuses for attiny13A to run default (9MHz) are, lfuse: 0x7A and hfuse: 0xFB 
 
 ||||METHOD 2: USING ARDUINO IDE (EASY)
 >> We need to override the clock source, this will disable the CKDIV8 fuse and let the chip run directly at 8MHz. (e.g. for attiny85)
