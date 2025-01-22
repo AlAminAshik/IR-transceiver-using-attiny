@@ -20,6 +20,9 @@ Type FOR ATTINY13A: "avrdude -c arduino -p t13 -P COMXX -b 19200 -U lfuse:w:0x7A
 Type FOR ATTINY85 : "avrdude -c arduino -p t85 -P COMxx -b 19200 -B 125 -U lfuse:w:0xE2:m"
 Change the COMXX port with the designated port. (can be found in Arduno IDE port settings)
 > It should return success!
+> (optional) check the changed fuse settings:
+Type FOR ATTINY13A: "avrdude -c arduino -p t13 -P COMxx -b 19200 -U lfuse:r:-:h -U hfuse:r:-:h"
+Type FOR ATTINY85 : "avrdude -c arduino -p t85 -P COMxx -b 19200 -U lfuse:r:-:h -U hfuse:r:-:h"
 
 ||||METHOD 2: USING ARDUINO IDE (EASY)
 >> We need to override the clock source, this will disable the CKDIV8 fuse and let the chip run directly at 8MHz. (e.g. for attiny85)

@@ -1,4 +1,4 @@
-// //This code is for attiny13A
+// //This code is for attiny85
 // //common code: pwr=17843; stop=18098;
 // //common code: 0=59678; 1=62228; 2=59168 ; 3=41318 ; 4=63248 ; 5=58148 ; 6=42338 ; 7=48458 ; 8=44378 ; 9=46418 ; -=63503 ; +=43102;
 
@@ -40,6 +40,10 @@
 
 // 	if (key != 0)
 // 	{
+// 		digitalWrite(led_1, HIGH);
+// 		delay(1000);
+// 		digitalWrite(led_1, LOW);
+// 		delay(1000);
 // 		switch (key)
 // 		{
 // 		case 42338: //6
