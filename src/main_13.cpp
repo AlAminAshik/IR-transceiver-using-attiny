@@ -6,10 +6,24 @@
 //common code: 0=59678; 1=62228; 2=59168 ; 3=41318 ; 4=63248 ; 5=58148 ; 6=42338 ; 7=48458 ; 8=44378 ; 9=46418 ; -=63503 ; +=43102;
 
 #include <Arduino.h>
-#define irPin 1         // PB1 of attiny85
-#define Fan 0           // PB0 of attiny85
+#define irPin 4         // PB1 of attiny85
+#define ZC_PIN 1        // Zero Crossing Detection (ZCD) pin //has interrupt and PWM
+#define Fan 0           // PB0 of attiny85  //Has PWM
 #define led_1 2         // PB2 of attiny85
 #define led_2 3         // PB3 of attiny85
+
+// Speed levels (lower values = faster speed)
+const int speedLevels[5] = {180, 130, 90, 50, 10};  // Phase delay values
+
+volatile int speedIndex = 0;  // Current speed level index (0 to 4)
+volatile int firingDelay = speedLevels[speedIndex];
+
+void zeroCrossISR() {
+    delayMicroseconds(firingDelay);
+    digitalWrite(Fan, HIGH);
+    delayMicroseconds(10);  // Short pulse to trigger TRIAC
+    digitalWrite(Fan, LOW);
+}
 
 //uint16_t pot_values[6] = {59678, 62228, 59168, 41318, 63248, 58148};
 
