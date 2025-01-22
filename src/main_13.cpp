@@ -10,9 +10,7 @@
 #define ZC_PIN 1        // Zero Crossing Detection (ZCD) pin //has interrupt and PWM
 #define Fan_PIN 0           // PB0 of attiny85  //Has PWM
 #define led_1_PIN 2         // PB2 of attiny85
-bool last_led_1_state;
 #define led_2_PIN 3         // PB3 of attiny85
-bool last_led_2_state;
 
 // Speed levels (lower values = faster speed)
 const int speedLevels[5] = {180, 130, 90, 50, 10};  // Phase delay values //180 means off
@@ -64,16 +62,8 @@ void loop() {
 
 	if (key != 0)
 	{
-		switch (key)
+	switch (key)
     {
-    case 58148: // 5
-            digitalWrite(led_1_PIN, last_led_1_state);
-            last_led_1_state = !last_led_1_state;
-        break;
-    case 42338: // 6
-            digitalWrite(led_2_PIN, last_led_2_state);
-            last_led_2_state = !last_led_2_state;
-        break;
     case 59678: // 0
         speedIndex = 0;
         break;
@@ -88,6 +78,18 @@ void loop() {
         break;
     case 63248: // 4
         speedIndex = 4;
+        break;
+    case 58148: // 5
+            digitalWrite(led_1_PIN, HIGH);
+        break;
+    case 42338: // 6
+            digitalWrite(led_1_PIN, LOW);
+        break;
+    case 48458: // 7
+            digitalWrite(led_2_PIN, HIGH);
+        break;
+    case 44378: // 8
+            digitalWrite(led_2_PIN, LOW);
         break;
     }
     firingDelay = speedLevels[speedIndex]; //update speed
